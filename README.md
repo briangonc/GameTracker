@@ -1,6 +1,3 @@
-<p align="center">
-	<img alt="Logo Inspiring" src="https://github.com/StefaniniInspiring/desafio/blob/main/imgs/inspiring-logo.png?raw=true" width="360">
-</p>
 
 # Desafio Inspiring :muscle:
 
