@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Oferta Tracker</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#C70160" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/pwa/apple-touch-icon.png"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="estilo.css" />
+    <script>
+      if (
+        "serviceWorker" in navigator &&
+        !window.location.host.includes("localhost") &&
+        window.location.host.includes("http")
+      ) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js");
+        });
+      }
+    </script>
+    <noscript>
+      Seu navegador não suporta javascript. Considere utilizar um navegador
+      moderno ou habilite execução de javascript.
+    </noscript>
+  </head>
+
+
+
+  <body>
+     <!-- Cabeçalho da página (LOGO GRAMETRACKER) -->
+    <header>
+      <img class="container" src="assets/logo-horizontal.svg" alt="Logo Game Tracker" />
+    </header>
+
+    <div class="container ofertas">
+      <h2 class="text">Ofertas</h2>
+    </div>
+
+    <!-- Container OFERTAS, PESQUISA e FILTRO -->
+    <article class="container filters">
+      <div class = "searchbar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <g id="search_24px">
+          <path id="icon/action/search_24px" fill-rule="evenodd" clip-rule="evenodd" d="M14.965 14.255H15.755L20.745 19.255L19.255 20.745L14.255 15.755V14.965L13.985 14.685C12.845 15.665 11.365 16.255 9.755 16.255C6.165 16.255 3.255 13.345 3.255 9.755C3.255 6.165 6.165 3.255 9.755 3.255C13.345 3.255 16.255 6.165 16.255 9.755C16.255 11.365 15.665 12.845 14.685 13.985L14.965 14.255ZM5.255 9.755C5.255 12.245 7.26501 14.255 9.755 14.255C12.245 14.255 14.255 12.245 14.255 9.755C14.255 7.26501 12.245 5.255 9.755 5.255C7.26501 5.255 5.255 7.26501 5.255 9.755Z" fill="white" fill-opacity="0.5"/>
+          </g>
+          </svg>
+        <input onkeyup="search()" id="search" type="text" placeholder="Procurar">
+      </div>
+      <section class="order">
+        <p class="text-bold">Ordenar por:</p>
+        <select onchange="orderGamesBy()" name="" id="orderBy">
+          <option value="discount">% de Desconto</option>
+          <option value="price-decrescent">Maior preço</option>
+          <option value="price-crescent">Menor preço</option>
+          <option value="title">Título</option>
+        </select>
+      </section>
+    </article>
+
+    <!-- Conteúdo da página (JOGOS) -->
+    <main class="container">
+      <article id="jogos-lista"></article>
+      <button class="loadItens">
+        CARREGAR MAIS
+      </button>
+    </main>
+
+    <!-- Rodapé da página -->
+    <footer>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.37479 2.44507L7.33505 0L0 6.1192L2.03958 8.56427L9.37479 2.44507ZM31.6625 6.12018L24.3273 0.000976562L22.2876 2.44605L29.6228 8.56525L31.6625 6.12018ZM15.8313 3.48596C7.91883 3.48596 1.50287 9.90192 1.50287 17.8144C1.50287 25.7269 7.91883 32.1429 15.8313 32.1429C23.7438 32.1429 30.1598 25.7269 30.1598 17.8144C30.1598 9.90192 23.7438 3.48596 15.8313 3.48596ZM4.68701 17.8144C4.68701 23.9597 9.68605 28.9587 15.8314 28.9587C21.9767 28.9587 26.9757 23.9597 26.9757 17.8144C26.9757 11.6691 21.9767 6.67004 15.8314 6.67004C9.68605 6.67004 4.68701 11.6691 4.68701 17.8144Z" fill="white"/>
+        <path d="M23.3967 20.7349L22.5355 14.6824C22.3142 13.1258 20.9789 11.9722 19.4065 11.9722H12.2477C10.6753 11.9722 9.33996 13.1258 9.11871 14.6824L8.25745 20.7349C8.08362 21.9518 9.0239 23.0343 10.2486 23.0343C10.7859 23.0343 11.2916 22.8209 11.6709 22.4417L13.4566 20.6638H18.1975L19.9754 22.4417C20.3547 22.8209 20.8683 23.0343 21.3977 23.0343C22.6303 23.0343 23.5706 21.9518 23.3967 20.7349ZM15.0369 16.7131H13.4566V18.2934H12.6665V16.7131H11.0862V15.9229H12.6665V14.3426H13.4566V15.9229H15.0369V16.7131ZM18.1975 15.9229C17.763 15.9229 17.4074 15.5674 17.4074 15.1328C17.4074 14.6982 17.763 14.3426 18.1975 14.3426C18.6321 14.3426 18.9877 14.6982 18.9877 15.1328C18.9877 15.5674 18.6321 15.9229 18.1975 15.9229ZM19.7779 18.2934C19.3433 18.2934 18.9877 17.9378 18.9877 17.5032C18.9877 17.0686 19.3433 16.7131 19.7779 16.7131C20.2124 16.7131 20.568 17.0686 20.568 17.5032C20.568 17.9378 20.2124 18.2934 19.7779 18.2934Z" fill="white"/>
+        </svg>
+      <p class="container">© 2021, Game Tracker Inc. Todos os direitos reservados. Nulla facilisi. Etiam sagittis congue tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse eu velit et ante luctus egestas. Aenean sed nisi tellus. Duis non ornare libero. Quisque suscipit maximus nisi, in gravida felis. Cras ornare mauris ac nisi congue, ut condimentum sem tincidunt. Phasellus semper tellus malesuada turpis gravida cursus. Duis nec eleifend nunc, vitae finibus elit. Aliquam eget diam vitae purus suscipit viverra.</p>
+      <div class="links text-bold">
+        <a href="">Termos de Serviço</a>
+        <a href="">Politica de Privacidade</a>
+        <a href="">Trabalhe conosco</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
