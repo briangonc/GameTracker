@@ -1,5 +1,5 @@
 
-### GameTracker
+### GameTracker 🕹️
 
 ![Exemplo](imgs/filtro.gif)
 
